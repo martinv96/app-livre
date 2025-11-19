@@ -1,6 +1,5 @@
 const Book = require('../models/Book');
 
-// GET /books - Liste des livres avec filtres
 exports.getBooks = async (req, res) => {
   try {
     const { titre, auteur, categorie, disponibilite } = req.query;
@@ -18,7 +17,6 @@ exports.getBooks = async (req, res) => {
   }
 };
 
-// POST /books - Ajouter un livre
 exports.addBook = async (req, res) => {
   try {
     const { titre, auteur, categorie, isbn, resume } = req.body;
@@ -39,7 +37,6 @@ exports.addBook = async (req, res) => {
   }
 };
 
-// PUT /books/:id - Modifier un livre
 exports.updateBook = async (req, res) => {
   try {
     const { id } = req.params;
@@ -56,7 +53,6 @@ exports.updateBook = async (req, res) => {
   }
 };
 
-// DELETE /books/:id - Supprimer un livre
 exports.deleteBook = async (req, res) => {
   try {
     const { id } = req.params;

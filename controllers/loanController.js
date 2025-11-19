@@ -2,12 +2,10 @@ const Loan = require('../models/Loan');
 const Book = require('../models/Book');
 const User = require('../models/User');
 
-// POST /loans - Emprunter un livre
 exports.createLoan = async (req, res) => {
   try {
     const { userId, bookId } = req.body;
 
-    // Vérifier si le livre est disponible
     const book = await Book.findById(bookId);
     if (!book) {
       return res.status(404).json({ message: 'Livre non trouvé' });
@@ -16,7 +14,6 @@ exports.createLoan = async (req, res) => {
       return res.status(400).json({ message: 'Livre non disponible' });
     }
 
-    // Créer l'emprunt
     const newLoan = new Loan({
       userId,
       bookId,
@@ -25,11 +22,9 @@ exports.createLoan = async (req, res) => {
 
     await newLoan.save();
 
-    // Mettre à jour la disponibilité du livre
     book.disponibilite = false;
     await book.save();
 
-    // Ajouter l'emprunt à l'historique de l'utilisateur
     await User.findByIdAndUpdate(userId, {
       $push: { historiqueEmprunts: newLoan._id }
     });
@@ -40,7 +35,6 @@ exports.createLoan = async (req, res) => {
   }
 };
 
-// GET /loans/:userId - Historique des emprunts
 exports.getUserLoans = async (req, res) => {
   try {
     const { userId } = req.params;

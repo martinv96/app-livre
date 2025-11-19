@@ -1,11 +1,7 @@
-﻿// app.js représente le js qui anime la page web (index.html)
-
-// Configuration de base
-const API_URL = 'http://localhost:3000/api';
+﻿const API_URL = 'http://localhost:3000/api';
 let token = localStorage.getItem('token');
 let userId = localStorage.getItem('userId');
 
-// FONCTIONS UTILITAIRES
 function showMessage(text, type = 'success') {
     const message = document.createElement('div');
     message.className = `message `;
@@ -42,7 +38,6 @@ async function apiCall(url, options = {}) {
     }
 }
 
-// NAVIGATION
 function showSection(sectionId) {
     ['authSection', 'catalogSection', 'profileSection', 'adminSection'].forEach(id => {
         document.getElementById(id).style.display = 'none';
@@ -73,7 +68,6 @@ function logout() {
     updateNav();
 }
 
-// AUTHENTIFICATION
 document.getElementById('registerForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const result = await apiCall(`${API_URL}/users/register`, {
@@ -113,7 +107,6 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     }
 });
 
-// CATALOGUE
 function showCatalog() {
     showSection('catalogSection');
     loadBooks();
@@ -175,7 +168,6 @@ async function borrowBook(bookId) {
     }
 }
 
-// PROFIL
 function showProfile() {
     showSection('profileSection');
     loadLoanHistory();
@@ -200,7 +192,6 @@ async function loadLoanHistory() {
     `).join('');
 }
 
-// ADMINISTRATION
 function showAdmin() {
     showSection('adminSection');
     loadAdminBooks();

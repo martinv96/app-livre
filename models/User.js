@@ -13,7 +13,6 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   historiqueEmprunts: [{
-    // le type de l'objet veut dire que ce champ référence des documents dans une autre collection
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Loan'
   }]
