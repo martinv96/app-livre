@@ -7,7 +7,14 @@ const connectDB = require('./config/database');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-connectDB();
+// Connexion à MongoDB (non-bloquant)
+connectDB().then(connected => {
+  if (connected) {
+    console.log('Base de données prête');
+  } else {
+    console.warn('Application démarrée sans connexion DB');
+  }
+});
 
 // Middlewares
 app.use(cors());
