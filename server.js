@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path');
 const connectDB = require('./config/database');
 
 const app = express();
@@ -20,14 +21,15 @@ connectDB().then(connected => {
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/books', require('./routes/bookRoutes'));
 app.use('/api/loans', require('./routes/loanRoutes'));
 
+// Route principale - sert l'interface
 app.get('/', (req, res) => {
-  res.json({ message: 'Bienvenue sur l\'API de gestion de bibliothèque' });
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(PORT, () => {
