@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliothèque en Ligne</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <h1>App-Livre</h1>
+        <div id="navLinks"></div>
+    </nav>
+
+    <div class="container">
+        <!-- Section Connexion/Inscription -->
+        <div id="authSection">
+            <div class="auth-forms">
+                <div class="form-container">
+                    <h2>Connexion</h2>
+                    <form id="loginForm">
+                        <input type="email" id="loginEmail" placeholder="Email" required>
+                        <input type="password" id="loginPassword" placeholder="Mot de passe" required>
+                        <button type="submit">Se connecter</button>
+                    </form>
+                </div>
+
+                <div class="form-container">
+                    <h2>Inscription</h2>
+                    <form id="registerForm">
+                        <input type="email" id="registerEmail" placeholder="Email" required>
+                        <input type="password" id="registerPassword" placeholder="Mot de passe" required>
+                        <button type="submit">S'inscrire</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Catalogue -->
+        <div id="catalogSection" style="display:none;">
+            <h2>Catalogue des Livres</h2>
+            
+            <div class="search-filters">
+                <input type="text" id="searchTitle" placeholder="Rechercher par titre">
+                <input type="text" id="searchAuthor" placeholder="Rechercher par auteur">
+                <input type="text" id="searchCategory" placeholder="Rechercher par catégorie">
+                <button onclick="searchBooks()">Rechercher</button>
+                <button onclick="loadBooks()">Tout afficher</button>
+            </div>
+
+            <div id="booksList"></div>
+        </div>
+
+        <!-- Section Profil -->
+        <div id="profileSection" style="display:none;">
+            <h2>Mon Profil</h2>
+            <p id="userEmail"></p>
+            <h3>Historique des emprunts</h3>
+            <div id="loanHistory"></div>
+        </div>
+
+        <!-- Section Admin -->
+        <div id="adminSection" style="display:none;">
+            <h2>Gestion des Livres</h2>
+            
+            <div class="form-container">
+                <h3>Ajouter un livre</h3>
+                <form id="addBookForm">
+                    <input type="text" id="bookTitle" placeholder="Titre" required>
+                    <input type="text" id="bookAuthor" placeholder="Auteur" required>
+                    <input type="text" id="bookCategory" placeholder="Catégorie" required>
+                    <input type="text" id="bookISBN" placeholder="ISBN" required>
+                    <textarea id="bookResume" placeholder="Résumé" rows="3"></textarea>
+                    <button type="submit">Ajouter</button>
+                </form>
+            </div>
+
+            <h3>Liste des livres</h3>
+            <div id="adminBooksList"></div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmation -->
+    <div id="confirmModal" style="display:none;">
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h3>Confirmation</h3>
+                <p id="confirmMessage"></p>
+                <div class="modal-actions">
+                    <button onclick="confirmAction(false)">Annuler</button>
+                    <button class="btn-danger" onclick="confirmAction(true)">Confirmer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
