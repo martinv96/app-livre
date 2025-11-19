@@ -27,6 +27,18 @@ app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/books', require('./routes/bookRoutes'));
 app.use('/api/loans', require('./routes/loanRoutes'));
 
+// Route de santé pour vérifier l'état de l'API
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'ok',
+    mongodb: require('mongoose').connection.readyState === 1 ? 'connected' : 'disconnected',
+    env: {
+      hasMongoUri: !!process.env.MONGODB_URI || !!process.env.MONGO_URI,
+      hasJwtSecret: !!process.env.JWT_SECRET
+    }
+  });
+});
+
 // Route principale - sert l'interface
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
