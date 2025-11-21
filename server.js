@@ -8,7 +8,6 @@ const connectDB = require('./config/database');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Connexion à MongoDB (non-bloquant)
 connectDB().then(connected => {
   if (connected) {
     console.log('Base de données prête');
@@ -27,7 +26,6 @@ app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/books', require('./routes/bookRoutes'));
 app.use('/api/loans', require('./routes/loanRoutes'));
 
-// Route de santé pour vérifier l'état de l'API
 app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'ok',
@@ -39,7 +37,6 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Route principale - sert l'interface
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });

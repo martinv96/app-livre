@@ -1,5 +1,4 @@
-﻿// Configuration de base
-const API_URL = window.location.hostname === 'localhost' 
+﻿const API_URL = window.location.hostname === 'localhost' 
     ? 'http://localhost:3000/api' 
     : 'https://app-livre-git-main-mvallee96s-projects.vercel.app/api';
 let token = localStorage.getItem('token');
